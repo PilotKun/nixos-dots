@@ -1,3 +1,6 @@
+@define-color color-bar-bg                              #282828;
+@define-color color-bar-fg                              #ebdbb2;
+@define-color color-bar-underline                       #1d2021;
 @define-color color-bg                                  #282828;
 @define-color color-fg                                  #ebdbb2;
 @define-color color-button-bg                           #83a598;
@@ -26,12 +29,6 @@
 @define-color color-widget-battery-low-blink-fg         #282828;
 @define-color color-widget-backlight-bg                 #d3869b;
 @define-color color-widget-backlight-fg                 #282828;
-@define-color color-widget-temperature-bg               #8ec07c;
-@define-color color-widget-temperature-fg               #282828;
-@define-color color-widget-temperature-critical-bg      #fb4934;
-@define-color color-widget-temperature-critical-fg      #282828;
-@define-color color-widget-memory-bg                    #83a598;
-@define-color color-widget-memory-fg                    #282828;
 @define-color color-widget-cpu-bg                       #d5c4a1;
 @define-color color-widget-cpu-fg                       #282828;
 @define-color color-widget-power-profile-balanced-bg    #d3869b;
@@ -44,46 +41,32 @@
 @define-color color-widget-tray-needs-attention         #fb4934;
 @define-color color-widget-idle-inhibitor-off-bg        #504945;
 @define-color color-widget-idle-inhibitor-off-fg        #a89984;
-@define-color color-widget-idle-inhibitor-on-bg         #689d6a;
+@define-color color-widget-idle-inhibitor-on-bg         #d5c4a1;
 @define-color color-widget-idle-inhibitor-on-fg         #282828;
-@define-color color-widget-scratchpad-bg                #ff0000;
-@define-color color-widget-scratchpad-fg                #ff0000;
+@define-color color-widget-notifications-bg             #83a598;
+@define-color color-widget-notifications-fg             #282828;
 @define-color color-widget-power-bg                     #83a598;
 @define-color color-widget-power-fg                     #282828;
-@define-color color-widget-window-bg                    #d3869b;
-@define-color color-widget-window-fg                    #282828;
-@define-color color-widget-keyboard-state-bg            #fe8019;
-@define-color color-widget-keyboard-state-fg            #282828;
-@define-color color-widget-language-bg                  #fe8019;
-@define-color color-widget-language-fg                  #282828;
 @define-color color-tooltip-bg                          #282828;
 @define-color color-tooltip-fg                          #ebdbb2;
-@define-color color-menu-bg                             #282828;
-@define-color color-menuitem-bg                         @color-menu-bg;
-@define-color color-menuitem-fg                         #ebdbb2;
-@define-color color-menuitem-hover-bg                   mix(@color-menu-bg, #ebdbb2, 0.1);
-@define-color color-menuitem-hover-fg                   #83a598;
-@define-color color-menuitem-active-bg                  #83a598;
-@define-color color-menuitem-active-fg                  #282828;
-@define-color color-gradient-fade                       #fbf1c7;
 
 * {
-    font-family: "JetBrainsMono Nerd Font Propo", monospace;
-    font-size: 17px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
     font-weight: bold;
     border: none;
-    border-radius: 100px;
+    border-radius: 4px;
 }
 
 window#waybar {
-    background: none;
-    border: none;
-    margin: 10px;
+    background-color: @color-bar-bg;
+    color: @color-bar-fg;
+    border-bottom: 2px solid @color-bar-underline;
 }
 
 window#waybar > * {
-    margin: 10px;
-    margin-bottom: 0px;
+    margin-top: 2px;
+    margin-bottom: 3px; 
 }
 
 window#waybar.hidden {
@@ -95,194 +78,123 @@ button {
     background-color: @color-button-bg;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
 }
 
-/* you can set a style on hover for any module like this */
 #pulseaudio:hover {
     background-color: @color-widget-audio-hover-bg;
     color: @color-widget-audio-hover-fg;
 }
 
 #workspaces {
-    padding: 0;
-    margin: 0;
+    padding-left: 0;
+    margin: 10;
 }
 
 #workspaces button {
-    transition: none;
     padding: 0;
     min-height: 0px;
-    min-width: 37px;
-    margin-left: 4px;
-    background: linear-gradient(
-        to top,
-        @color-workspace-button-bg,
-        mix(@color-workspace-button-bg, @color-gradient-fade, 0.25)
-    );
+    min-width: 26px;
+    margin-left: 3px;
+    background-color: @color-workspace-button-bg;
     color: @color-workspace-button-fg;
 }
 
 #workspaces button:hover {
-    background: linear-gradient(
-        to top,
-        @color-workspace-button-hover-bg,
-        mix(@color-workspace-button-hover-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-workspace-button-hover-bg;
     color: @color-workspace-button-hover-fg;
 }
 
 #workspaces button.active {
-    background: linear-gradient(
-        to top,
-        @color-workspace-button-focused-bg,
-        mix(@color-workspace-button-focused-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-workspace-button-focused-bg;
     color: @color-workspace-button-focused-fg;
 }
 
-#workspaces button.urgent {
-    background: linear-gradient(
-        to top,
-        @color-button-urgent-bg,
-        mix(@color-button-urgent-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-button-urgent-fg;
+#workspaces button:not(.active):not(.empty) {
+    background-color: @color-workspace-button-bg;
+    color: @color-widget-battery-bg;
 }
 
-#mode {
-    background-color: #ff0000;
-    box-shadow: inset 0 -3px #0000ff;
+#workspaces button.urgent {
+    background-color: @color-button-urgent-bg;
+    color: @color-button-urgent-fg;
 }
 
 #clock,
 #battery,
 #cpu,
-#memory,
-#disk,
-#temperature,
 #backlight,
 #network,
 #pulseaudio,
-#wireplumber,
-#custom-media,
+#mpris,
 #tray,
-#mode,
 #idle_inhibitor,
-#scratchpad,
 #power-profiles-daemon,
 #custom-notifications,
-#custom-power,
-#keyboard-state,
-#language,
-#window,
-#mpd {
-    padding: 0px 12px;
-}
-
 #custom-power {
-    margin-left: 10px;
+    padding: 0 7px;
 }
 
 #window,
 #workspaces {
-    margin: 0px 4px;
+    margin: 0 3px;
 }
 
-#window {
-    margin-left: 6px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
     margin-left: 0;
 }
 
-/* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
     margin-right: 0;
 }
 
+#custom-notifications {
+    background-color: @color-widget-notifications-bg;
+    color: @color-widget-notifications-fg;
+    font-size: 14px;
+    padding-right: 10px;
+}
+
 #custom-power {
-    background: linear-gradient(
-        to top,
-        @color-widget-power-bg,
-        mix(@color-widget-power-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-power-bg;
     color: @color-widget-power-fg;
-    font-size: 20px;
-    margin-right: 4px;
-}
-
-#window {
-    background: linear-gradient(
-        to top,
-        @color-widget-window-bg,
-        mix(@color-widget-window-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-widget-window-fg;
-}
-
-window#waybar.empty #window {
-    background: none;
-    margin: 0px;
-    padding: 0px;
+    font-size: 14px;
+    padding-right: 10px;
 }
 
 #clock {
-    background: linear-gradient(
-        to top,
-        @color-widget-clock-bg,
-        mix(@color-widget-clock-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-clock-bg;
     color: @color-widget-clock-fg;
 }
 
 #battery {
-    background: linear-gradient(
-        to top,
-        @color-widget-battery-bg,
-        mix(@color-widget-battery-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-battery-bg;
     color: @color-widget-battery-fg;
 }
 
-#battery.charging,
-#battery.plugged {
-    background: linear-gradient(
-        to top,
-        @color-widget-battery-bg,
-        mix(@color-widget-battery-bg, @color-gradient-fade, 0.25)
-    );
+#battery.charging, #battery.plugged {
+    background-color: @color-widget-battery-bg;
     color: @color-widget-battery-fg;
 }
 
 #battery.charging {
+    padding-right: 8px;
 }
 
 @keyframes blink-battery-low {
     to {
-        background: linear-gradient(
-            to top,
-            @color-widget-battery-low-blink-bg,
-            mix(@color-widget-battery-low-blink-bg, @color-gradient-fade, 0.25)
-        );
+        background-color: @color-widget-battery-low-blink-bg;
         color: @color-widget-battery-low-blink-fg;
     }
 }
 
 #battery:not(.charging) {
+    padding-right: 14px;
 }
 
-/* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background: linear-gradient(
-        to top,
-        @color-widget-battery-low-bg,
-        mix(@color-widget-battery-low-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-battery-low-bg;
     color: @color-widget-battery-low-fg;
     animation-name: blink-battery-low;
     animation-duration: 0.5s;
@@ -292,37 +204,25 @@ window#waybar.empty #window {
 }
 
 #power-profiles-daemon {
+    padding-right: 11px;
 }
 
 #power-profiles-daemon.performance {
-    background: linear-gradient(
-        to top,
-        @color-widget-power-profile-performance-bg,
-        mix(
-            @color-widget-power-profile-performance-bg,
-            @color-gradient-fade,
-            0.25
-        )
-    );
+    background-color: @color-widget-power-profile-performance-bg;
     color: @color-widget-power-profile-performance-fg;
+    padding-right: 8px;
 }
 
 #power-profiles-daemon.balanced {
-    background: linear-gradient(
-        to top,
-        @color-widget-power-profile-balanced-bg,
-        mix(@color-widget-power-profile-balanced-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-power-profile-balanced-bg;
     color: @color-widget-power-profile-balanced-fg;
+    padding-right: 14px;
 }
 
 #power-profiles-daemon.power-saver {
-    background: linear-gradient(
-        to top,
-        @color-widget-power-profile-saver-bg,
-        mix(@color-widget-power-profile-saver-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-power-profile-saver-bg;
     color: @color-widget-power-profile-saver-fg;
+    padding-right: 11px;
 }
 
 label:focus {
@@ -330,135 +230,38 @@ label:focus {
 }
 
 #cpu {
-    background: linear-gradient(
-        to top,
-        @color-widget-cpu-bg,
-        mix(@color-widget-cpu-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-cpu-bg;
     color: @color-widget-cpu-fg;
-}
-
-#memory {
-    background: linear-gradient(
-        to top,
-        @color-widget-memory-bg,
-        mix(@color-widget-memory-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-widget-memory-fg;
-}
-
-#disk {
-    background-color: #ff0000;
+    padding-right: 11px;
 }
 
 #backlight {
-    background: linear-gradient(
-        to top,
-        @color-widget-backlight-bg,
-        mix(@color-widget-backlight-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-backlight-bg;
     color: @color-widget-backlight-fg;
 }
 
 #network {
-    background-color: #ff0000;
+    background-color: #83a598;
+    color: #282828;
 }
 
 #network.disconnected {
-    background-color: #ff0000;
+    background-color: #fb4934;
+    color: #282828;
 }
 
 #pulseaudio {
-    background: linear-gradient(
-        to top,
-        @color-widget-audio-bg,
-        mix(@color-widget-audio-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-audio-bg;
     color: @color-widget-audio-fg;
 }
 
 #pulseaudio.muted {
-    background: linear-gradient(
-        to top,
-        @color-widget-audio-muted-bg,
-        mix(@color-widget-audio-muted-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-audio-muted-bg;
     color: @color-widget-audio-muted-fg;
 }
 
-#keyboard-state {
-    background: linear-gradient(
-        to top,
-        @color-widget-keyboard-state-bg,
-        mix(@color-widget-keyboard-state-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-widget-keyboard-state-fg;
-}
-
-#keyboard-state > label {
-    padding: 0px;
-}
-
-#keyboard-state > label.locked {
-    background: transparent;
-}
-
-#language {
-    background: linear-gradient(
-        to top,
-        @color-widget-language-bg,
-        mix(@color-widget-language-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-widget-language-fg;
-}
-
-#wireplumber {
-    background-color: #ff0000;
-    color: #00ff00;
-}
-
-#wireplumber.muted {
-    background-color: #0000ff;
-}
-
-#custom-media {
-    background-color: #ff0000;
-    color: #0000ff;
-    min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-    background-color: #00ff00;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ff0000;
-}
-
-#temperature {
-    background: linear-gradient(
-        to top,
-        @color-widget-temperature-bg,
-        mix(@color-widget-temperature-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-widget-temperature-fg;
-}
-
-#temperature.critical {
-    background: linear-gradient(
-        to top,
-        @color-widget-temperature-critical-bg,
-        mix(@color-widget-temperature-critical-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-widget-temperature-critical-fg;
-}
-
 #tray {
-    background: linear-gradient(
-        to top,
-        @color-widget-tray-bg,
-        mix(@color-widget-tray-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-tray-bg;
 }
 
 #tray > .passive {
@@ -467,131 +270,36 @@ label:focus {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background: linear-gradient(
-        to top,
-        @color-widget-tray-needs-attention,
-        mix(@color-widget-tray-needs-attention, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-tray-needs-attention;
 }
 
 #idle_inhibitor {
-    background: linear-gradient(
-        to top,
-        @color-widget-idle-inhibitor-off-bg,
-        mix(@color-widget-idle-inhibitor-off-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-idle-inhibitor-off-bg;
     color: @color-widget-idle-inhibitor-off-fg;
+    padding-right: 13px;
 }
 
 #idle_inhibitor.activated {
-    background: linear-gradient(
-        to top,
-        @color-widget-idle-inhibitor-on-bg,
-        mix(@color-widget-idle-inhibitor-on-bg, @color-gradient-fade, 0.25)
-    );
+    background-color: @color-widget-idle-inhibitor-on-bg;
     color: @color-widget-idle-inhibitor-on-fg;
 }
 
-#mpd {
-    background: #ff0000;
-    color: #0000ff;
-}
-
-#mpd.disconnected {
-    background-color: #00ff00;
-}
-
-#mpd.stopped {
-    background-color: #ff0000;
-}
-
-#mpd.paused {
-    background-color: #ffff00;
-}
-
-#scratchpad {
-    background: linear-gradient(
-        to top,
-        @color-widget-scratchpad-bg,
-        mix(@color-widget-scratchpad-bg, @color-gradient-fade, 0.25)
-    );
-    color: @color-widget-scratchpad-fg;
-}
-
-#scratchpad.empty {
-    background-color: transparent;
-}
-
-#privacy {
-    padding: 0;
-}
-
-#privacy-item {
-    padding: 0 5px;
-    color: #ff0000;
-}
-
-#privacy-item.screenshare {
-    background-color: #ff0000;
-}
-
-#privacy-item.audio-in {
-    background-color: #0000ff;
-}
-
-#privacy-item.audio-out {
-    background-color: #00ff00;
-}
-
 tooltip {
-    background-color: @color-tooltip-bg;
-    border: none;
+  background-color: @color-tooltip-bg;
+  border: none;
+  border-radius: 5px;
 }
 
 tooltip decoration {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 tooltip decoration:backdrop {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 tooltip label {
-    color: @color-tooltip-fg;
-    padding: 3px 7px;
-}
-
-menu {
-    background: @color-menu-bg;
-    border-radius: 20px;
-}
-
-menu label {
-    color: #ff0000;
-}
-
-menuitem {
-    background: @color-menuitem-bg;
-}
-
-menuitem label {
-    color: @color-menuitem-fg;
-}
-
-menuitem:focus,
-menuitem:hover {
-    background: @color-menuitem-hover-bg;
-}
-
-menuitem:focus label,
-menuitem:hover label {
-    color: @color-menuitem-hover-fg;
-}
-
-menuitem:active {
-    background: @color-menuitem-active-bg;
-}
-
-menuitem:active label {
-    color: @color-menuitem-active-fg;
+  color: @color-tooltip-fg;
+  padding-left: 4px;
+  padding-right: 4px;
 }

@@ -150,6 +150,7 @@
   pulseaudio
   pavucontrol
   helvum
+  qbittorrent
   zbar
   speedcrunch
   xorg.xkill
@@ -166,13 +167,21 @@
   cliphist
   libnotify
   pkgs.polkit_gnome
+  starship
  # ------- #
   brave
   firefox
-  qbittorrent
   mpv
   xclip
   vscode
+  themix-gui
+  nwg-look
+  libsForQt5.qt5ct
+  kdePackages.qt6ct
+  libsForQt5.qtstyleplugin-kvantum
+  kdePackages.qtstyleplugin-kvantum  
+  stremio
+  librewolf
   # ------- #
   btop
   flameshot
@@ -182,13 +191,9 @@
   eza
   yazi
   # ------- #
-  # Dolphin
-  kdePackages.dolphin          # The core file manager
-  kdePackages.dolphin-plugins  # Integrations like git and nextcloud
-  kdePackages.qtsvg            # Required for rendering standard SVG icons
-  kdePackages.kio              # KDE's core virtual filesystem
-  kdePackages.kio-extras       # Provides thumbnails, SFTP, Samba, etc.
-  kdePackages.kio-fuse         # Allows mounting remote filesystems
+  nautilus
+  sushi
+  ffmpegthumbnailer
   ];
 
   fonts.packages = with pkgs; [

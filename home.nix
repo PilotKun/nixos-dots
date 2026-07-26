@@ -11,6 +11,8 @@ let
     picom = "picom";
     hypr = "hypr";
     waybar = "waybar";
+    mako = "mako";
+    starship = "starship";
   };
 in
 
@@ -33,6 +35,9 @@ in
 
   programs.bash = {
     enable = true;
+    initExtra = ''
+    eval -- "$(/etc/profiles/per-user/pilot/bin/starship init bash --print-full-init)"
+    '';
     shellAliases = {
       btw = "echo i use nixos, btw";
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dots#pixos";
@@ -44,6 +49,8 @@ in
   };
 
   programs.tmux.enable = true;
+
+  programs.starship.enable = true;
 
   programs.eza = {
     enable = true;
@@ -57,10 +64,10 @@ in
     enableBashIntegration = true;
   };
 
-  # GTK Configuration
+# GTK Configuration
   gtk = {
     enable = true;
-    # gtk-application-prefer-dark-theme=1;
+    
     theme = {
       name = "Gruvbox-Dark";
       package = pkgs.gruvbox-dark-gtk;
@@ -73,8 +80,22 @@ in
       name = "capitaine-cursors-gruvbox";
       package = pkgs.capitaine-cursors-themed;
     };
+
+    # Force GTK3 and GTK4 apps to prefer dark mode
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
-  
+
+  # Force libadwaita apps (like modern Nautilus) to use dark mode
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };  
   # Qt Configuration (This fixes Dolphin!)
   # qt = {
   #   enable = true;
@@ -85,6 +106,7 @@ in
   # Clipboard manager - pairs with rofi + xclip, which are already in your setup.
   # Bind a key in your qtile config to run `clipmenu` to pull up the picker.
   services.clipmenu.enable = true;
+  services.cliphist.enable = true;
 
   # Polkit authentication agent (needed since qtile/Hyprland don't provide one)
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -142,6 +164,7 @@ in
     DOTFILES_DIR = "${config.home.homeDirectory}/nixos-dots";
     WALLPAPERS_DIR = "${config.home.homeDirectory}/Pictures/walls"; # Adjust this path to wherever your backgrounds are stored
     QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
 
   home.packages = with pkgs; [
