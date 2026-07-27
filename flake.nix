@@ -13,7 +13,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
   };
-
+  
   outputs = { self, nixpkgs, home-manager, hyprland, ... }: {
     nixosConfigurations.pixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

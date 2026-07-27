@@ -168,6 +168,12 @@
   libnotify
   pkgs.polkit_gnome
   starship
+  pkgs.cargo
+  pkgs.rustc
+  pkgs.pkg-config
+  pkgs.openssl
+  hypridle
+  wlogout
  # ------- #
   brave
   firefox
@@ -190,6 +196,7 @@
   bat
   eza
   yazi
+  satty
   # ------- #
   nautilus
   sushi

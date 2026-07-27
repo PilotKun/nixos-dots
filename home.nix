@@ -43,6 +43,7 @@ in
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dots#pixos";
       ls = "eza -lha --group-directories-first --icons=auto";
       lsa = " ls -a";
+      cd = "z";
       ff = "fzf --preview 'bat --style=numbers --color=always {}'";
       pilothomelab = "ssh pilot_homelab@192.168.0.104";
     };
@@ -158,6 +159,14 @@ in
     '';
   };
 
+  # Opens magnet links in stremio instead of qbittorrent
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/magnet" = [ "smartcode-stremio.desktop" ];
+    };
+  };
+
 # Ensure environment variables are set for GTK and Qtile
   home.sessionVariables = {
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
@@ -166,6 +175,8 @@ in
     QT_QPA_PLATFORMTHEME = "qt5ct";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
+
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
 
   home.packages = with pkgs; [
     neovim
