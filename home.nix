@@ -12,7 +12,6 @@ let
     hypr = "hypr";
     waybar = "waybar";
     mako = "mako";
-    starship = "starship";
   };
 in
 
@@ -52,6 +51,7 @@ in
   programs.tmux.enable = true;
 
   programs.starship.enable = true;
+  home.file.".config/starship.toml".source = create_symlink "${dotfiles}/starship.toml";
 
   programs.eza = {
     enable = true;
