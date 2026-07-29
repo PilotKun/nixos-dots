@@ -86,11 +86,15 @@
 
   programs.adb.enable = true;
 
+  programs.firefox.enable = true;
+
   services.picom.enable = true;
 
-  services.qbittorrent.enable = true;
+  services.power-profiles-daemon.enable = true;
 
-  programs.firefox.enable = true;
+  services.logind.powerKey = "ignore";
+
+  services.qbittorrent.enable = true;
 
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "pilot" ];
@@ -172,12 +176,10 @@
   pkgs.rustc
   pkgs.pkg-config
   pkgs.openssl
-  hypridle
   wlogout
  # ------- #
   brave
   firefox
-  mpv
   xclip
   vscode
   themix-gui
@@ -187,7 +189,6 @@
   libsForQt5.qtstyleplugin-kvantum
   kdePackages.qtstyleplugin-kvantum  
   stremio
-  librewolf
   # ------- #
   btop
   flameshot

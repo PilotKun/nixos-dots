@@ -159,6 +159,29 @@ in
     '';
   };
 
+  programs.mpv = {
+    enable = true;
+    
+    # You can configure MPV settings here as well
+    config = {
+      profile = "high-quality";
+      ytdl-format = "bestvideo+bestaudio";
+    };
+
+    # Inject your chosen scripts directly into the package
+    package = pkgs.mpv.override {
+      scripts = with pkgs.mpvScripts; [
+        mpris
+        thumbfast
+        smartskip
+        mpv-cheatsheet
+        mpris
+        webtorrent-mpv-hook
+        # modernz
+      ];
+    };
+  };
+
   # Opens magnet links in stremio instead of qbittorrent
   xdg.mimeApps = {
     enable = true;

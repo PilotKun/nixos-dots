@@ -115,11 +115,11 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/power": {
-        "format" : "⏻",
-        "tooltip": false,
-        "on-click": "~/nixos-dots/config/waybar/scripts/power.sh"
-    },
+    // "custom/power": {
+    //     "format" : "⏻",
+    //     "tooltip": false,
+    //     "on-click": "~/nixos-dots/config/waybar/scripts/power.sh"
+    // },
     "custom/notifications": {
         "format": "",
         "on-click": "~/nixos-dots/config/waybar/scripts/notification_center.sh toggle",
