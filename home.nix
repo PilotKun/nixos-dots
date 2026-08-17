@@ -97,12 +97,6 @@ in
       color-scheme = "prefer-dark";
     };
   };  
-  # Qt Configuration (This fixes Dolphin!)
-  # qt = {
-  #   enable = true;
-  #   platformTheme.name = "gtk"; 
-  #   style.name = "";
-  # };
 
   # Clipboard manager - pairs with rofi + xclip, which are already in your setup.
   # Bind a key in your qtile config to run `clipmenu` to pull up the picker.
@@ -147,18 +141,6 @@ in
     };
   };
 
-  xdg.configFile = (builtins.mapAttrs
-    (name: subpath: {
-      source = create_symlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs) // {
-      "kwalletrc".text = ''
-        [Wallet]
-        Enabled=false
-    '';
-  };
-
   programs.mpv = {
     enable = true;
     
@@ -177,7 +159,6 @@ in
         mpv-cheatsheet
         mpris
         webtorrent-mpv-hook
-        # modernz
       ];
     };
   };
@@ -214,14 +195,8 @@ in
     xdg-utils
     file-roller
     scrcpy
-    # Hunting Nixpkgs on the big screen
-    # (pkgs.writeShellApplication {
-    #   name = "ns";
-    #   runtimeInputs = with pkgs; [
-    #     fzf
-    #     nix-search-tv
-    #   ];
-    #   text = builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh";
-    # })
+    ffmpeg
+    yt-dlp
+    alsa-lib
   ];
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, input,... }:
+{ config, pkgs, inputs,... }:
 
 {
   imports =
@@ -79,12 +79,14 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  
   programs.xfconf.enable = true;
 
   security.polkit.enable = true;
 
   programs.adb.enable = true;
+
+  programs.steam.enable = true;
 
   programs.firefox.enable = true;
 
@@ -107,6 +109,11 @@
     script = ''
       flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     '';
+  };
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   # Required by Flatpak - qtile doesn't provide this itself like a full DE would
@@ -151,6 +158,7 @@
   brightnessctl
   playerctl
   wireplumber
+  cava
   pulseaudio
   pavucontrol
   helvum
@@ -177,11 +185,13 @@
   pkgs.pkg-config
   pkgs.openssl
   wlogout
+  gnumake
  # ------- #
   brave
   firefox
   xclip
   vscode
+  vesktop
   themix-gui
   nwg-look
   libsForQt5.qt5ct

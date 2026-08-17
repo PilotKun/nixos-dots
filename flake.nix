@@ -8,15 +8,14 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # oxwm = {
-    #   url = "github:tonybanters/oxwm";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
   
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, hyprland, ... }: {
     nixosConfigurations.pixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+
+      specialArgs = { inherit inputs; }; 
+      
       modules = [
         ./configuration.nix
         ./hardware-configuration.nix
@@ -29,13 +28,6 @@
             backupFileExtension = "backup";
           };
         }
-        # oxwm.nixosModules.default
-        # {
-        #   services.xserver = {
-        #     enable = true;
-        #     windowManager.oxwm.enable = true;
-        #   };
-        # }
       ];
     };
   };
