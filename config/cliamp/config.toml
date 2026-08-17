@@ -1,5 +1,0 @@
-eq_preset = "Custom"
-
-eq = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-theme = ""
-visualizer = "Bricks"

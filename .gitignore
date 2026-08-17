@@ -1,8 +1,5 @@
-./config/nvim/
-./config/qtile/
-flake.lock
-
 # Untracked paths
 /config/nvim
 /config/qtile
-flake.lock
+/config/cliamp
+
