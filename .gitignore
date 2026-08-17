@@ -1,5 +1,5 @@
 # Untracked paths
-/config/nvim
+/config/nvim/lazy-lock.json
 /config/qtile
 /config/cliamp
 
