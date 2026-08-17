@@ -1,6 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  }; 
   dotfiles = "${config.home.homeDirectory}/nixos-dots/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
@@ -12,6 +16,7 @@ let
     hypr = "hypr";
     waybar = "waybar";
     mako = "mako";
+    cliamp = "cliamp";
   };
 in
 
@@ -210,5 +215,6 @@ in
     ffmpeg
     yt-dlp
     alsa-lib
+    pkgs-unstable.cliamp
   ];
 }
